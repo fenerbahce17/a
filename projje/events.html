@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <title>Spor Takımı &mdash; Colorlib Web Sitesi Şablonu</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Nunito+Sans:200,300,400,700,900|Oswald:400,700">
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/jquery-ui.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <link rel="stylesheet" href="css/aos.css">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        body {
+            background-color: #001F3F; /* Lacivert arka plan rengi */
+            color: #fff; /* Yazı rengi */
+            padding-top: 0; /* Navbar'ı en üste getirmek için padding-top'u 0 yapın */
+            background-image: url('images/taraftarrr.jpg')
+
+        }
+
+        
+
+        .widget h3 {
+            color: #001F3F; /* Widget başlık rengi */
+        }
+
+        .col-lg-3 {
+            margin: 0 auto;
+            float: none;
+        }
+
+        .hero-wrap {
+            background-size: cover !important;
+            background-position: center center !important;
+            /* Arka plan fotoğrafı */
+            
+        }
+
+        .hero-contents {
+            position: relative;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .container {
+            margin-top: 100px;
+
+        }
+
+        .card {
+            border: none;
+        }
+
+        .card-header {
+            background-color: #001F3F;
+            color: #fff;
+        }
+
+        .btn-primary,
+        .btn-register {
+            background-color: #FFD700;
+            border-color: #FFD700;
+        }
+
+        /* Ekstra Stiller */
+        .login-register-container {
+            border: 3px solid #FFD700;
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #FFD700; /* Sarı arkaplan rengi */
+        }
+
+            .login-register-container h3 {
+                color: #001F3F; /* Lacivert yazı rengi */
+                margin-bottom: 20px;
+            }
+
+        /* Navigation Bar Stilleri */
+        .site-navbar {
+            position: fixed;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            z-index: 1000;
+        }
+
+
+        .a {
+            width: 600px;
+            height: 400px;
+            background-color: lightskyblue;
+            border-style: solid;
+            border-color: skyblue;
+            border-width: 30px;
+
+            border-style: solid;
+            border-radius: 20px;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -30%);
+
+        }
+        .t{
+            color:white;
+        }
+            
+            
+
+        
+        
+       
+        }
+
+
+    </style>
+    <script>
+        const mysql = require('mysql');
+
+        const connection = mysql.createConnection({
+            host: 'localhost',
+            database: 'testing',
+            user: 'root',
+            password: ''
+        });
+
+        connection.connect(function (error) {
+            if (error) {
+                throw error;
+            }
+            else {
+                console.log('MySQL Database is connected Successfully');
+            }
+        });
+
+        module.exports = connection;
+        
+
+
+        function loginUser() {
+            var username = document.getElementById("username").value;
+            var password = document.getElementById("password").value;
+            console.log("Kullanıcı Adı: " + username + " | Şifre: " + password);
+
+            // Sunucuya giriş bilgilerini gönderme işlemi
+            fetch('http://localhost:3000/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, password }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => console.error('Hata:', error));
+
+
+
+        }
+
+        function registerUser() {
+            var username = document.getElementById("registerUsername").value;
+            var email = document.getElementById("registerEmail").value;
+            var password = document.getElementById("registerPassword").value;
+            console.log("Kayıt Olundu - Kullanıcı Adı: " + username + " | E-posta: " + email + " | Şifre: " + password);
+
+
+            // Sunucuya kayıt bilgilerini gönderme işlemi
+            fetch('http://localhost:3000/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ username, email, password }),
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data.message);
+                })
+                .catch(error => console.error('Hata:', error));
+
+        }
+
+        function showLogin() {
+            document.getElementById("loginForm").style.display = "block";
+            document.getElementById("registerForm").style.display = "none";
+        }
+
+        function showRegister() {
+            document.getElementById("loginForm").style.display = "none";
+            document.getElementById("registerForm").style.display = "block";
+        }
+    </script>
+</head>
+<body>
+    <div class="site-wrap">
+        <div class="site-mobile-menu">
+            <div class="site-mobile-menu-header">
+                <div class="site-mobile-menu-close mt-3">
+                    <span class="icon-close2 js-menu-toggle"></span>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="row no-gutters site-navbar align-items-md-center py-3">
+                <div class="col-6 col-lg-2 site-logo">
+                    <a href="index.html">Fenerbahçe</a>
+                </div>
+                <div class="col-6 col-lg-10 text-right menu">
+                    <nav class="site-navigation text-right text-md-right">
+                        <ul class="site-menu js-clone-nav d-none d-lg-block">
+                            <li><a href="index.html">Anasayfa</a></li>
+                            <li><a href="gallery.html">Galeri</a></li>
+                            <li class="has-children">
+                            <li><a href="players.html">Oyuncular</a></li>
+                            <li class="active"><a href="events.html">Taraftar Giriş</a></li>
+                            <li><a href="about.html">İletişim</a></li>
+                            <li><a href="contact.html">Hakkımızda</a></li>
+                        </ul>
+                        <a href="#" class="site-menu-toggle js-menu-toggle text-black d-inline-block d-lg-none">
+                            <span class="icon-menu h3"></span>
+                        </a>
+                    </nav>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="site-section">
+        <div class="container">
+            <div class="row mb-5">
+                <div class="col-sm-6 col-md-4 col-lg-3 mb-5 mb-lg-5">
+                    <div class="custom-media d-block"></div>
+                </div>
+                <!-- Diğer etkinliklerin bilgileri buraya eklenir -->
+            </div>
+
+            <!-- Taraftar Girişi Formu -->
+            <div class="col-lg-3">
+                <div class=" a" >
+                <div class="widget mb-4">
+                    <h1 class="t">Taraftar Girişi</h1>
+                    <form id="loginForm">
+                        <div class="form-group">
+                            <label for="username" style="color:black">Kullanıcı Adı:</label>
+                            <input type="text" class="form-control" id="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password"style="color:black">Şifre:</label>
+                            <input type="password" class="form-control" id="password" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="loginUser()"style="color:black">Giriş Yap</button>
+                        <!-- Kayıt ol butonu eklendi -->
+                        <button type="button" class="btn btn-register" onclick="showRegister()">Kayıt Ol</button>
+                    </form>
+
+                    <!-- Kayıt Ol Formu -->
+                    <form id="registerForm" style="display: none;">
+                        <div class="form-group">
+                            <label for="registerUsername"style="color:black">Kullanıcı Adı:</label>
+                            <input type="text" class="form-control" id="registerUsername" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerEmail"style="color:black">E-posta:</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="registerPassword"style="color:black">Şifre:</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <button type="button" class="btn btn-primary" onclick="registerUser()">Kayıt Ol</button>
+                        <!-- Giriş yap butonu eklendi -->
+                        <button type="button" class="btn btn-register" onclick="showLogin()">Giriş Yap</button>
+                    </form>
+                </div>
+                 
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+</body>
+</html>
+
+
