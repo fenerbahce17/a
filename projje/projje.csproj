@@ -123,6 +123,10 @@
     <Content Include="images\ferdi.jpg" />
     <Content Include="images\fred.jpg" />
     <Content Include="images\galeri.jpg" />
+    <Content Include="images\galerii.jpg" />
+    <Content Include="images\galeriii.jpg" />
+    <Content Include="images\galeriiii.jpg" />
+    <Content Include="images\galeriiiii.jpg" />
     <Content Include="images\hero11.jpg" />
     <Content Include="images\hero_1.jpg" />
     <Content Include="images\hero_2.jpg" />
@@ -142,6 +146,7 @@
     <Content Include="images\taraftarr.jpg" />
     <Content Include="images\taraftarrr.jpg" />
     <Content Include="images\thumbs_b_c_25e1a1a4fbea5f6b036853d3c122b386.jpg" />
+    <Content Include="images\Ülker1.jpg" />
     <Content Include="images\İrfancan.jpg" />
     <Content Include="index.html" />
     <Content Include="js\aos.js" />
@@ -164,10 +169,12 @@
     <Content Include="kadro.html" />
     <Content Include="main.html" />
     <Content Include="players.html" />
+    <Content Include="Premium.html" />
     <Content Include="readme.txt" />
     <Content Include="single.html" />
     <Content Include="Web.config" />
     <Content Include="WebForm1.aspx" />
+    <Content Include="WebForm2.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -191,6 +198,12 @@
     </Compile>
     <Compile Include="WebForm1.aspx.designer.cs">
       <DependentUpon>WebForm1.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="WebForm2.aspx.designer.cs">
+      <DependentUpon>WebForm2.aspx</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup>
